@@ -17,22 +17,22 @@ int main()
 		for (i = x0; i <= x1; i += dx)
 		{
 			f = int((a*i*i)-b*i+c);
-			cout ; " " ; i;
-			cout ; " " ; f ; ;
+			cout << " " ; i;
+			cout << " " ; f ; ;
 		}
 	if ((x0 > 3) && (b == 0))
 		for (i = x0; i <= x1; i += dx)
 		{
 			f = int((i-a) / (i-c));
-			cout ; " " ; i;
-			cout ; " "; f; ;
+			cout << " " ; i;
+			cout << " "; f; ;
 		}
 	else
 		for (i = x0; i <= x1; i += dx)
 		{
 			f = int(i / c);
-			cout ; " " ; i;
-			cout ; " ";  f; ;
+			cout << " " ; i;
+			cout << " ";  f; ;
 		}
 	system("pause");
 	return (0);
