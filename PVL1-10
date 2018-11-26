@@ -14,7 +14,7 @@ int main()
 	cout <<" "<<dx; cin >> dx;
 	cout <<" "<<X Y; ;
 	if ((a < 3) && (b!= 0))
-		for (i = 0; i <= 1; i += dx)
+		for (i = x0; i <= x1; i += dx)
 		{
 			f = int((a*i*i)-b*i+c);
 			cout <<" "; i;
