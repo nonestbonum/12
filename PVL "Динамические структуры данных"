@@ -1,0 +1,179 @@
+#include <iostream>
+
+using namespace std;
+
+struct file
+{
+    string name;
+    struct date
+    {
+        int day;
+        int month;
+        int year;
+    }d;
+    int kolvo;
+    file* next;
+
+};
+
+file* make_file()
+{
+    file* tmp = new file();
+    cout <<"File name: ";
+    cin >> tmp->name;
+    cout << "Date(Example 23 02 1999): ";
+    cin >> tmp->d.day >> tmp->d.month >> tmp->d.year;
+    cout << "How a lot of times use file: ";
+    cin >> tmp->kolvo;
+    tmp->next = NULL;
+    return tmp;
+}
+
+file* make_list(int n)
+{
+    file* head = make_file();
+    for (int i = 1; i<n; i++)
+    {
+        file* r = new file();
+        r = make_file();
+        r->next = head;
+        head = r;
+    }
+    return head;
+}
+
+void print_list(file* head)
+{
+    file* f = head;
+    int k = 0;
+    while(f)
+    {
+        cout <<"Name: "<<f->name << " " <<"Date:"<< f->d.day << "." << f->d.month << "." << f->d.year << " " <<"Kolvo:"<< f->kolvo<<endl;
+        f = f->next;
+        k++;
+    }
+}
+
+
+void del(file* HEAD,int n,int &size)
+{
+    if ((HEAD->next != NULL) && (n < size) && (n >= 0))
+    {
+        file *temp = HEAD, *helping = HEAD;
+
+        for (int i = 0; i < n; i++)
+        {
+            helping = temp;
+            temp = temp->next;
+        }
+
+        if (temp == HEAD)
+        {
+            HEAD = temp->next;
+        }
+        else
+        {
+            helping->next = temp->next;
+        }
+        free(temp);
+        size--;
+    }
+}
+
+void print_max(file* head)
+{
+    file* f = head;
+    int k = 0;
+    int max=0;
+    int key=0;
+    while(f)
+    {
+        if(f->kolvo>max){
+            key = k;
+            max = f->kolvo;
+        }
+        f = f->next;
+        k++;
+    }
+    k=0;
+    f=head;
+    while(f)
+    {
+        if(key == k ){
+            cout<<"Naib KOlvo obrash:"<<k<<endl;
+            cout <<"Name: "<<f->name << " " <<"Date:"<< f->d.day << "." << f->d.month << "." << f->d.year << " " <<"Kolvo:"<< f->kolvo<<endl;
+            break;
+        }
+        f = f->next;
+        k++;
+    }
+}
+
+int delete_date(file* head, int d, int m, int y, int &n)
+{
+    file* f = head;
+    int k = 0;
+    while (f)
+    {
+        k = 1;
+        if ((y < f->d.year) || ((y == f->d.year) && (m < f->d.month)) || ((y == f->d.year) && (m == f->d.month) && (d < f->d.day)))
+        {
+            del(head,k,n);
+        }
+        k++;
+        f = f->next;
+
+    }
+    return k;
+    print_list(make_list(n));
+
+}
+
+int main()
+{
+    int n=1;
+    int size=0;
+    file* f;
+        do
+        {
+            cout << "1. Enter Faile " << endl;
+            cout << "2. Delete file" << endl;
+            cout << "3. Printfails" << endl;
+            cout << "4. Naib obr"<<endl;
+            cout << "0. Exit" << endl;
+            cout << "Select action > "; cin >> n;
+            switch (n)
+            {
+            case 1:
+                cout<< "Enter how a lot of files you want to add? ";
+                int how;
+                cin>>how;
+                size+=how;
+                f = make_list(how);
+                print_list(f);
+                break;
+            case 2:
+                cout << "Please enter the date to delete the file with the date fewer assignments given date : ";
+                int d, m, y;
+                cin >> d >> m >> y;
+
+                if ((d < 1) && (d>31) && (m < 1) && (m>12) && (y < 1) && (y>2016))
+                {
+                    cout << "ERROR! Wrong formate date!";
+                }
+                else
+                    delete_date(f, d, m, y, size);
+                print_list(f);
+                break;
+            case 3:
+                print_list(f);
+                break;
+            case 4:
+                print_max(f);
+                break;
+            case 0:
+                return 0;
+            }
+        } while (true);
+    return 0;
+}
