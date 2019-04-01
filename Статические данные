@@ -1,0 +1,35 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+class CPi // объявление класса, содержащего статический член данных
+{
+    public:
+    static double Pi; // статический член данных
+};
+// объявление статической переменной за пределами класса
+static double Exp = 2.7182818284;
+double CPi::Pi = 3.141592653589793;
+// неинициализированные статические переменные, значения которых = 0 (по умолчанию)
+static double ZeroD;
+static int ZeroI;
+static char ZeroC;
+int * pZ; // внешний указатель на int
+int _tmain(int argc, _TCHAR* argv[])
+{
+    double d;
+    CPi obj; // объект класса
+    double * pPi; // указатель на double
+    double * pExp; // указатель на double
+    pPi = &obj.Pi;
+    pExp = &::Exp; // другой вид доступа через ::
+    d = obj.Pi; // d = 3.14159
+    d = Exp; // d = 2.71828
+    d = *pPi; // d = 3.14159
+    pZ = &ZeroI; // внешний указатель на int
+    d = *pZ; // d = 0
+    *pZ = 5;
+    d = ZeroI; // d = 5
+
+    return 0;
+}
