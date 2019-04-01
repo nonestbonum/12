@@ -25,3 +25,5 @@ CMyPoint::CMyPoint(CMyPoint & ref_Point )// конструктор копиро�
     x = ref_Point.x;
     y = ref_Point.y;
 }
+
+CName::~CName(void){} // деструктор
