@@ -14,7 +14,7 @@ class Radius
     double Get(void) {return radius;}
     void Set(double nradius) {radius = nradius;}
 };
-// "дружественные" функции к классу Radius
+// функции-друзья к классу Radius
 double GetLength(Radius & r)
 {
     return (double)(2 * r.radius * 3.1415);
@@ -23,13 +23,12 @@ double GetArea(Radius & r)
 {
     return (double)(r.radius * r.radius * 3.1415);
 }
-// объявление "дружественного" класса
+// объявление класса-друга
 class Volume
 {
     public:
-    double GetVolume(Radius * r) // функция получает указатель на Radius
+    double GetVolume(Radius * r) // указатель на Radius
     {
-        // доступ к private-члену класса Radius из класса-друга Volume
         return (double)(4.0 / 3.0 * 3.1415 * r->radius * r->radius * r->radius);
     }
 };
