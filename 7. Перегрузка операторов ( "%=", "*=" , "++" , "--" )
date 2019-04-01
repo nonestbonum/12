@@ -1,0 +1,106 @@
+class Integer
+{
+private:
+    int number;
+public:
+    // конструкторы класса
+    Integer() {number = 0;}
+    Integer(int _number) {number = _number;}
+    int Get(void) {return number;}
+    void Set(int _number) {number = _number;}
+
+    // объявление функуции-друга к классу Integer операторной, которая перегружает оператор %=
+    friend Integer operator%=(Integer& obj1, Integer& obj2);
+};
+Integer operator%=(Integer& obj1, Integer& obj2)
+{
+    obj1.number = obj1.number % obj2.number; // доступ по ссылке
+    return obj1;
+}
+
+
+
+
+class Complex
+{
+private:
+    double real; // вещественная часть
+    double imag; // мнимая часть
+public:
+     Complex(double _real, double _imag) // конструктор класса
+    {
+        real = _real;
+        imag = _imag;
+    }
+    double GetReal(void) { return real; }
+    double GetImag(void) { return imag; }
+    void Set(double _real, double _imag)
+    {
+        real = _real;
+        imag = _imag;
+    }
+
+    Complex operator*=(Complex obj) // операторная функция, которая перегружает оператор *=
+    {
+        double r;
+        double i;
+        r = real*obj.real - imag*obj.imag;
+        i = real*obj.imag + obj.real*imag;
+        real = r;
+        imag = i;
+        return *this;
+    }
+};
+
+
+
+
+
+class ArrayInt
+{
+private:
+    int A[100]; // массив целых чисел
+    int size;
+public:
+    // конструкторы
+    ArrayInt() {size = 0;}
+    ArrayInt(int _size)
+    {
+        if (_size>100) _size=100;
+        size = _size;
+
+        for (int i=0; i<size; i++)
+            A[i] = 0;
+    }
+    void SetAi(int index, int value)
+    {
+        if ((index>=0) && (index<=size))
+            A[index] = value;
+    }
+    int GetAi(int index) { return A[index]; }
+    int GetSize(void) { return size; }
+    ArrayInt operator++(void) // перегруженный оператор ++
+    {
+        for (int i=0; i<size; i++)
+            A[i] = A[i] + 5;
+        return *this;
+    }
+    ArrayInt operator++(int t)
+    {
+        for (int i=0; i<size; i++)
+            A[i] = A[i] + 5;
+        return *this;
+    }
+    ArrayInt operator--(void)
+    {
+        for (int i=0; i<size; i++)
+            A[i] = A[i] - 5;
+        return *this;
+    }
+    ArrayInt operator--(int t)
+    {
+        for (int i=0; i<size; i++)
+            A[i] = A[i] - 5;
+        return *this;
+    }
+}
