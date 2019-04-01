@@ -1,0 +1,29 @@
+#include <stdlib.h>
+#include <iostream>
+using namespace std;
+class MyClass
+{
+    int x; // доступна только внутри класса
+public:
+    void Get(); // функция ввода значения в x
+    void Show(); // функция Вывода x на экран
+};
+void MyClass::Get()
+{
+    cout << "input x: ";
+    cin >> this->x; // ввод данных в переменную x объекта a
+}
+void MyClass::Show()
+{
+    cout << this->x << "\n\n"; // вывод x из объекта a на экран
+}
+int main()
+{
+    system("CLS");
+    MyClass a; //Создали объект a типа MyClass
+    a.Get(); // ввод
+    a.Show();
+    a.Get(); // ввод
+    a.Show(); // вывод данных на экран
+    system("PAUSE");
+}
