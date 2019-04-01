@@ -1,0 +1,16 @@
+#include <iostream>
+#include <string>
+using std::cout;using std::endl;using std::string;
+class ferstmy{
+    public:
+    int k1;
+    int k2;
+    ferstmy():k1(23),k2(32){}
+    private:
+ };
+ int main(){
+    cout<<"Все работает!"<<endl;
+    ferstmy klass1;
+    klass1.k1=8;
+    cout<<(klass1.k1+1)<<" "<<(klass1.k2)<<endl;
+ }
