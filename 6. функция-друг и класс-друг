@@ -1,0 +1,51 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+class Radius
+{
+    private:
+    double radius;
+    // объявление функций-друзей
+    friend double GetLength(Radius &);
+    friend double GetArea(Radius &);
+    // объявление класса-друга
+    friend class Volume;
+    public:
+    double Get(void) {return radius;}
+    void Set(double nradius) {radius = nradius;}
+};
+// "дружественные" функции к классу Radius
+double GetLength(Radius & r)
+{
+    return (double)(2 * r.radius * 3.1415);
+}
+double GetArea(Radius & r)
+{
+    return (double)(r.radius * r.radius * 3.1415);
+}
+// объявление "дружественного" класса
+class Volume
+{
+    public:
+    double GetVolume(Radius * r) // функция получает указатель на Radius
+    {
+        // доступ к private-члену класса Radius из класса-друга Volume
+        return (double)(4.0 / 3.0 * 3.1415 * r->radius * r->radius * r->radius);
+    }
+};
+int _tmain(int argc, _TCHAR* argv[])
+{
+    Radius r;
+    Volume v;
+    double len, area, vol;
+    r.Set(3);
+    len = GetLength(r);
+    // вызов внешней функции-друга GetArea()
+    area = ::GetArea(r);
+    // вызов функции класса-друга v
+    vol = v.GetVolume(&r);
+    cout << "Length = " << len << endl; // Length = 9.4245
+    cout << "Area = " << area << endl; // Area = 28.2735
+    cout << "Volume = " << vol << endl; // Volume = 113.094
+    return 0;
+}
