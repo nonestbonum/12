@@ -1,0 +1,27 @@
+#include <string>
+using namespace std;
+class CMyPoint
+{
+    int x, y;
+    public:
+    CMyPoint(void); // конструктор класса по умолчанию
+    CMyPoint(int nx, int ny); // конструктор класса с двумя параметрами
+    CMyPoint(CMyPoint & ref_Point); // конструктор копирования
+    int GetX(void) {return x;}
+    int GetY(void) {return y;}
+};
+CMyPoint::CMyPoint(void) // конструктор класса CMyPoint
+{
+    x = y = 0;
+}
+CMyPoint::CMyPoint(int nx, int ny) // конструктор класса CMyPoint с двумя параметрами
+{
+    x = nx;
+    y = ny;
+}
+CMyPoint::CMyPoint(CMyPoint & ref_Point )// конструктор копирования класса CMyPoint
+{
+    // копирование данных из одного объекта в другой
+    x = ref_Point.x;
+    y = ref_Point.y;
+}
