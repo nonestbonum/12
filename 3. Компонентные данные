@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+class TPoint
+{
+double x,y;
+static int N; // статический компонент: количество точек
+ public:
+TPoint(double x1 = 0.0,double y1 = 0.0){N++; x = x1; y = y1;}
+static int& count(){return N;} // статический компонент-функция
+};
+int TPoint :: N = 0; //инициализация статического компонента
+int main()
+{TPoint A(1.0,2.0);
+TPoint B(4.0,5.0);
+TPoint C(7.0,8.0);
+cout<< \nОпределены ”<<TPoint : : count()<<“точки”;
+return 0;}
