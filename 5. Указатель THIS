@@ -3,10 +3,10 @@
 using namespace std;
 class MyClass
 {
-    int x; // доступна только внутри класса
+    int x;
 public:
-    void Get(); // функция ввода значения в x
-    void Show(); // функция Вывода x на экран
+    void Get();
+    void Show();
 };
 void MyClass::Get()
 {
