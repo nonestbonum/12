@@ -1,0 +1,22 @@
+int GetCount()
+{
+    class _local
+    {
+    public:
+        static int Count(int count = std::numeric_limits<int>::max())
+        {
+            static int count_ = 0;
+            if (count != std::numeric_limits<int>::max()) count_ = count;
+            return count_;
+        }
+
+        static float Operation(float  a, float  b)
+        {
+            _local::Count(_local::Count() + 1);
+            return a;
+        }
+    };
+   _local::Count(0);
+   CALLBACK( _local::Operation);
+   return _local::Count();
+}
