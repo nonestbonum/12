@@ -1,22 +1,66 @@
-int GetCount()
+#include <iostream>
+ 
+class A
 {
-    class _local
-    {
-    public:
-        static int Count(int count = std::numeric_limits<int>::max())
-        {
-            static int count_ = 0;
-            if (count != std::numeric_limits<int>::max()) count_ = count;
-            return count_;
-        }
-
-        static float Operation(float  a, float  b)
-        {
-            _local::Count(_local::Count() + 1);
-            return a;
-        }
-    };
-   _local::Count(0);
-   CALLBACK( _local::Operation);
-   return _local::Count();
+ 
+private:
+   class B
+   {
+   private:
+      int b;
+   public:
+      B()
+      {
+         b = 5;
+      }
+      int getB()
+      {
+         return b;
+      }
+      void setB(int b)
+      {
+         this->b = b +A::getA(); // Как во вложенном классе использовать значение переменной внешнего класса?
+      }
+   };
+   int a;
+   B* b;
+public:
+   A()
+   {
+      a = 10;
+      b = new B();
+   }
+   ~A()
+   {
+      delete b;
+   }
+   int getA()
+   {
+      return a;
+   }
+   void setA(int a)
+   {
+      this->a = a;
+   }
+   int getB()
+   {
+      return b->getB();
+   }
+   void setB(int b)
+   {
+      this->b->setB(b);
+   }
+ 
+};
+int main()
+{
+   A* a = new A();
+   std::cout<<"a = "<<a->getA()<<std::endl;
+   std::cout<<"a.b = "<<a->getB()<<std::endl;
+   a->setA(15);
+   a->setB(25);
+   std::cout<<"a = "<<a->getA()<<std::endl;
+   std::cout<<"a.b = "<<a->getB()<<std::endl;
+   delete a;
+   return 0;
 }
